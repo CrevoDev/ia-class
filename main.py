@@ -12,7 +12,9 @@ from PIL import Image
 import pytesseract
 from pdf2image import convert_from_bytes
 import PyPDF2
+from dotenv import load_dotenv
 
+load_dotenv()
 
 class DocumentDTO:
     def __init__(self, link, numero_cnj, instancia, sistema, tribunal, tipo_documento, ha_liminar, tutela_antecipada, audiencia_designada, notificacao_extrajudicial, oficio, prazo_tutela_antecipada, tipo_audiencia, data_audiencia, hora_audiencia):
@@ -32,8 +34,8 @@ class DocumentDTO:
         self.data_audiencia = data_audiencia
         self.hora_audiencia = hora_audiencia
 
-os.environ["GEMINI_API_KEY"] = "AIzaSyDYwApATlXa9mONdzq_9pL7L9oFu0tea3U"
-genai.configure(api_key=os.environ["GEMINI_API_KEY"])
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=GEMINI_API_KEY)
 
 csv_file_path = 'data.csv'
 df = pd.read_csv(csv_file_path)
